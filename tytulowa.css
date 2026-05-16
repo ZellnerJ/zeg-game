@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #050508;;
+    font-family: 'Courier New', 'Courier New', Courier, monospace;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+        background-image: linear-gradient(rgba(255,255,255, 0.03)) 1px, transparent 1px,
+    linear-gradient(90deg,rgba(255,255,255, 0.03)) 1px, transparent 1px;
+        background-size: 40px 40px;
+}
+.menu_k{
+    text-align: center;
+}
+.napis{
+    color: #00ffff;
+    font-size: 64px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    text-shadow: 0 0 5px #00ffff,
+                 0 0 10px #00ffff,
+                 0 0  20px #00a3a3;
+    ;
+}
+.przyciski{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.b{
+    background: transparent;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:28px;
+    font-weight: bold;
+    padding: 12px 40px;
+    width: 280px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0,3 ease;
+}
+.graj{
+    color: #ff007f;
+    border: 3px solid #ff007f;
+    box-shadow: 0 0 10px #ff007f;
+    text-shadow: 0 0 5px #ff007f;
+    text-align: center;
+}
+.poz{
+    color: #00ffff;
+    border:3px solid #00ffff;
+    box-shadow: 0 0 10px #00ffff;
+    text-shadow: 0 0 5px solid #00ffff;
+    text-align: center;
+}
+.ust{
+    color: #9400d3;
+    border: 3px solid #9400d3;
+text-shadow: 0 0 10px #9400d3 ;
+box-shadow:  0 0 5px #9400d3;
+}
+.wyjscie{
+    color: #ff3333;
+    border: 3px solid #ff3333;
+    text-shadow: 0 0 #ff3333;
+    box-shadow: 0 0 #ff3333;
+}
+.linia{
+    height: 5px;
+    margin: 20px 0 0 0;
+    background-image: linear-gradient(45deg, #ff007f,#00ffff, #9400d3,#ff3333);
+}
+.box {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border: 1px solid #ff007f;
+    padding: 15px;
+    text-align: center;
+    background-color: rgba(5, 5, 8, 0.8);
+}
+.t{
+    color: #ff007f;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase; /* wielkie litery */
+    text-shadow: 5px #ff007f;
+}
+.name{
+    color: #ff007f;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.graj:hover {
+    background-color: #ff007f; 
+    color: #050508; 
+    box-shadow: 0 0 30px #ff007f; 
+}
+
+
+.poz:hover {
+    background-color: #00ffff;
+    color: #050508; 
+    box-shadow: 0 0 30px #00ffff;
+}
+
+
+.ust:hover {
+    background-color: #9400d3; 
+    color: #ffffff; 
+    box-shadow: 0 0 30px #9400d3; 
+}
+
+
+.wyjscie:hover {
+    background-color: #ff3333; 
+    color: #050508;
+    box-shadow: 0 0 30px #ff3333; 
+}
