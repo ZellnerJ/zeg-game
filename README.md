@@ -66,16 +66,16 @@ Celem gry jest przechodzenie przez kolejne labirynty i dotarcie do wyjścia. Pod
 # Struktura projektu
 -tytulowa.html
 -tytulowa.css
-poziomy/
-├── bloczek.jpg
-├── poziomy.css
-├── poziom1.html
-├── poziom1.js
-├── poziom2.html
-├── poziom2.js
-├── poziom3.html
-├── poziom3.js
-├── poziom4.html
-├── poziom4.js
-├── poziom5.html
-└── poziom5.js
+-poziomy/
+-├── bloczek.jpg
+-├── poziomy.css
+-├── poziom1.html
+-├── poziom1.js
+-├── poziom2.html
+-├── poziom2.js
+-├── poziom3.html
+-├── poziom3.js
+-├── poziom4.html
+-├── poziom4.js
+-├── poziom5.html
+-└── poziom5.js
