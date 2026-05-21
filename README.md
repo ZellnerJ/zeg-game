@@ -119,7 +119,7 @@ W labiryncie rozrzucone są kluczowe pakiety danych, które pozwalają Ci utrzym
 # Struktura projektu
 
 ```text
-- tytulowa.html
+- index.html
 - tytulowa.css
 
 /poziomy
