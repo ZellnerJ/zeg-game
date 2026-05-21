@@ -80,7 +80,7 @@ Cały Mainframe utrzymany jest w spójnej, mrocznej, neonowo-fioletowej stylisty
 
 * **🔹 Poziom 1:**
   * **Trudność:** Niska.
-  * **Opis:** Pierwsza warstwa sieci. Labirynt ma prostszy układ z szerokimi korytarzami. Skanery poruszają się wolno, a zagadki logiczne wymagają podstawowych operacji. Idealne miejsce na zsynchronizowanie rdzenia.
+  * **Opis:** Pierwsza warstwa sieci. Labirynt ma prostszy układ. Skanery poruszają się wolno, a zagadki logiczne wymagają podstawowych operacji. Idealne miejsce na zsynchronizowanie rdzenia.
 
 * **🔹 Poziom 2: **
   * **Trudność:** Średnio-niska.
