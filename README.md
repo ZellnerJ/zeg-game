@@ -113,7 +113,7 @@ W labiryncie rozrzucone są kluczowe pakiety danych, które pozwalają Ci utrzym
 
 ## 🚫 SYSTEMY OBRONNE (ZAGROŻENIA)
 
-* 🤖 **Strażnicy / Skanery (Sentinels):** Czerwone podprogramy patrolujące korytarze według sztywno określonych pętli kodu. Są przewidywalni, ale bezpośredni kontakt z nimi drastycznie niszczy Twój kod (-HP).
+* 🤖 **Strażnicy / Skanery (Sentinels):** Czerwone podprogramy patrolujące korytarze według sztywno określonych pętli kodu. Są przewidywalni, ale bezpośredni kontakt z nimi drastycznie niszczy  (-HP).
 * 👾 **Monstra (Glitch Beasts):** Zmutowane, nieprzewidywalne bestie programowe (wirusy). Potrafią wykryć obecność Skryptu, porzucić swój rewir i aktywnie ścigać gracza przez korytarze labiryntu.
 ---
 # Struktura projektu
