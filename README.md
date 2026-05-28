@@ -74,31 +74,6 @@ Ucieczka wymaga potężnego nakładu mocy. Każdy ruch obciąża Twój wirtualny
 
 ---
 
-##  ARCHITEKTURA SIECI (5 POZIOMÓW ZABEZPIECZEŃ)
-
-Cały Mainframe utrzymany jest w spójnej, mrocznej, neonowo-fioletowej stylistyce. W miarę jak przebijasz się głębiej do punktu ewakuacyjnego, system drastycznie zwiększa poziom trudności i algorytmy obronne:
-
-* **🔹 Poziom 1:**
-  * **Trudność:** Niska.
-  * **Opis:** Pierwsza warstwa sieci. Labirynt ma prostszy układ. Skanery poruszają się wolno, a zagadki logiczne wymagają podstawowych operacji. Idealne miejsce na zsynchronizowanie rdzenia.
-
-* **🔹 Poziom 2: **
-  * **Trudność:** Średnio-niska.
-  * **Opis:** Sieć zaczyna się zagęszczać. Pojawiają się pierwsze stacjonarne anomalie (pułapki laserowe) blokujące korytarze w określonym rytmie. Zagadki wymagają większego skupienia.
-
-* **🔹 Poziom 3: **
-  * **Trudność:** Średnia.
-  * **Opis:** Labirynt staje się bardziej zawiły i generuje ślepe zaułki. Strażnicy przyspieszają, a zarządzanie Staminą staje się kluczowe, by sprawnie manewrować i uciekać przed zagrożeniami.
-
-* **🔹 Poziom 4:**
-  * **Trudność:** Wysoka.
-  * **Opis:** Sektor o podwyższonym rygorze. Do akcji wkraczają **Monstra (Glitch Beasts)** – agresywne wirusy, które potrafią zboczyć ze swoich tras i aktywnie ścigać Skrypt, gdy zbliżysz się za blisko. Zagadki logiczne blokują kluczowe przejścia.
-
-* **🔹 Poziom 5:e)**
-  * **Trudność:** Ekstremalna.
-  * **Opis:** Finałowa warstwa sieci przed wyjściem do wolnego internetu. Przestrzeń jest maksymalnie zagęszczona klockami szyfrującymi. Ciasne korytarze są naszpikowane potworami, pułapkami laserowymi i ostateczną, najbardziej wymagającą zagadką deszyfrującą. Jeden fałszywy ruch oznacza reset.
-
----
 
 ## 🔮 CYFROWE ARTEFAKTY (ZASOBY)
 
