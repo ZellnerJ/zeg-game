@@ -8,7 +8,7 @@ const potwor = new Image();
 potwor.src = "potwor.png";
 
 const size = 40; 
-// Ustawiamy wymiary canvas na podstawie mapy (20 * 40 = 800)
+
 area.width = 20 * size; 
 area.height = 20 * size;
 
@@ -20,7 +20,7 @@ const plotno = [
   [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1],
   [1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+  [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
   [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
   [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
   [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
@@ -37,31 +37,62 @@ const plotno = [
 
 const potwory = [
   { row: 3, col: 5, typ: "staly" },
-  { row: 7, col: 9, typ: "staly" },
+  { row: 6, col: 9, typ: "staly" },
   { row: 12, col: 3, typ: "staly" },
   {
-    row: 7,
-    col: 5,
-    typ: "ruchomy",
-    startCol: 2, // 5 - 3 bloki = 2
-    endCol: 5,
+    row: 7,         // aktualna pozycja
+    col: 3,
+    typ: "gora-dol",
+    startRow: 4,    
+    endRow: 7,      // pozycja startowa
+    dir: -1,        // -1 oznacza ruch w górę 
+    speed: 0.025
+  },
+  {
+    row: 18,
+    col: 18,
+    typ: "gora-dol",
+    startRow: 15,
+    endRow:18,
     dir: -1,
     speed: 0.025
-  }
+  },
+  {row:16, col:10,typ:"staly"},
+   {row:12, col:12,typ:"staly"},
+   {
+    row:8,col:12,typ:"prawo-lewo",
+    startCol:9,
+    endCol:12,
+    dir: -1,
+    speed: 0.025
+   },
+   {row:1,col:18,typ:"staly"}
 ];
 
-// RUCH POTWORÓW
+
 function updateMonsters() {
   potwory.forEach(m => {
-    if (m.typ === "ruchomy") {
+    if (m.typ === "gora-dol") {
+      m.row += m.dir * m.speed;
+
+    
+      if (m.row >= m.endRow) {
+        m.row = m.endRow;
+        m.dir = -1; 
+      } else if (m.row <= m.startRow) {
+        m.row = m.startRow;
+        m.dir = 1;  
+      }
+    }
+  else if (m.typ == "prawo-lewo") {
       m.col += m.dir * m.speed;
 
       if (m.col >= m.endCol) {
         m.col = m.endCol;
-        m.dir = -1; // lewo
+        m.dir = -1; // w lewo
       } else if (m.col <= m.startCol) {
         m.col = m.startCol;
-        m.dir = 1; // prawo
+        m.dir = 1;  // w prawo
       }
     }
   });
@@ -87,8 +118,8 @@ function rysuj() {
     }
   }
 
-  // 2. RYSOWANIE POTWORÓW (To było brakujące ogniwo)
-  const monsterSize = size * 1.5; // Dopasuj rozmiar potwora do nowej siatki (size 40)
+
+  const monsterSize = size * 2.7; 
   potwory.forEach(m => {
     ctx.drawImage(
       potwor,
