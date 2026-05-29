@@ -53,7 +53,6 @@ function ustawStart() {
     }
 }
 
-
 // INPUT
 
 document.addEventListener("keydown", (e) => {
@@ -216,7 +215,6 @@ function rysujStamine() {
 
     // ramka
     ctx.strokeStyle = "white";
-
     ctx.lineWidth = 2;
 
     ctx.strokeRect(
@@ -243,10 +241,6 @@ function sprawdzWyjscie() {
     }
 }
 
-
-// petla gry
-
-
 function gameLoop() {
 
     ctx.clearRect(
@@ -255,6 +249,8 @@ function gameLoop() {
         area.width,
         area.height
     );
+
+    updateMonsters();
 
     rysuj();
 
@@ -268,10 +264,6 @@ function gameLoop() {
 
     requestAnimationFrame(gameLoop);
 }
-
-
-// START
-
 
 bloczek.onload = function () {
 
