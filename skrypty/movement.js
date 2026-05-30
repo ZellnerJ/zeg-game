@@ -2,6 +2,8 @@ console.log("movement działa");
 console.log(plotno);
 console.log(size);
 
+
+
 const keys = {};
 
 const gracz = {
@@ -27,7 +29,14 @@ const gracz = {
 
     //opóźnienie ładowania wytrzymałości
     staminaDelay: 3000,
-    lastSprintTime: 0
+    lastSprintTime: 0,
+
+    // zdrowie
+hp: 100,
+maxHp: 100,
+
+damageCooldown: 500,
+lastDamageTime: 0
 };
 
 //Start gracza
@@ -225,6 +234,35 @@ function rysujStamine() {
     );
 }
 
+function rysujHP() {
+
+    const width = 220;
+    const height = 20;
+
+    const x = area.width - width - 10;
+    const y = 10;
+
+    // tło
+    ctx.fillStyle = "#333";
+    ctx.fillRect(x, y, width, height);
+
+    // życie
+    ctx.fillStyle = "lightgreen";
+    ctx.fillRect(
+        x,
+        y,
+        (gracz.hp / gracz.maxHp) * width,
+        height
+    );
+
+    // ramka
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x, y, width, height);
+}
+
+
+
 //Szukanie wyjścia
 
 function sprawdzWyjscie() {
@@ -239,6 +277,54 @@ function sprawdzWyjscie() {
 
         console.log("Wykryto koniec poziomu");
     }
+}
+
+function sprawdzKolizjePotworow() {
+
+    const now = Date.now();
+
+    potwory.forEach(m => {
+
+        const monsterSize = size ;
+
+        const mx =
+            m.col * size -
+            monsterSize / 2 +
+            size / 2;
+
+        const my =
+            m.row * size -
+            monsterSize / 2 +
+            size / 2;
+
+        const hit =
+            gracz.x < mx + monsterSize &&
+            gracz.x + gracz.width > mx &&
+            gracz.y < my + monsterSize &&
+            gracz.y + gracz.height > my;
+
+        if (
+            hit &&
+            now - gracz.lastDamageTime > gracz.damageCooldown
+        ) {
+
+            gracz.hp -= 10;
+
+            if (gracz.hp < 0) {
+                gracz.hp = 0;
+            }
+
+            gracz.lastDamageTime = now;
+
+            console.log("Otrzymano obrażenia");
+
+            if (gracz.hp <= 0) {
+                alert("Game Over!");
+                location.reload();
+              
+            }
+        }
+    });
 }
 
 function gameLoop() {
@@ -256,9 +342,12 @@ function gameLoop() {
 
     ruch();
 
+    sprawdzKolizjePotworow();
+
     rysujGracza();
 
     rysujStamine();
+    rysujHP();
 
     sprawdzWyjscie();
 
