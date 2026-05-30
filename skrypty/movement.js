@@ -285,7 +285,11 @@ function sprawdzKolizjePotworow() {
 
     potwory.forEach(m => {
 
+<<<<<<< HEAD
         const monsterSize = size ;
+=======
+        const monsterSize = size * 2;
+>>>>>>> 6a2f2c1b14f109cabf239afe00cce67ba22abb83
 
         const mx =
             m.col * size -
@@ -321,7 +325,10 @@ function sprawdzKolizjePotworow() {
             if (gracz.hp <= 0) {
                 alert("Game Over!");
                 location.reload();
+<<<<<<< HEAD
               
+=======
+>>>>>>> 6a2f2c1b14f109cabf239afe00cce67ba22abb83
             }
         }
     });
