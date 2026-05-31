@@ -104,7 +104,7 @@ function updateMonsters() {
 
 function rysuj() {
   
- // ctx.clearRect(0, 0, area.width, area.height);
+ 
   
   ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
   ctx.lineWidth = 1;
@@ -126,11 +126,11 @@ function rysuj() {
   const monsterSize = size * 2.7; 
   zagrozenia.forEach(m => {
     if (m.typ === "pulapka") {
-      // Rysuj statyczną pułapkę
+      
       ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
     } else {
-      // Rysuj ruchomego potwora
-      const monsterSize = size * 1.5; // Dopasuj wielkość
+   
+      const monsterSize = size * 1.55; 
       ctx.drawImage(
         potwor,
         m.col * size - monsterSize / 2 + size / 2,
