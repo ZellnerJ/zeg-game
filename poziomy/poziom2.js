@@ -7,6 +7,10 @@ bloczek.src = "bloczek.jpg";
 const potwor = new Image();
 potwor.src = "potwor.png";
 
+const pulapka = new Image();
+pulapka.src = "pulapka.png";
+
+
 const size = 40; 
 
 area.width = 20 * size; 
@@ -35,10 +39,10 @@ const plotno = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-const potwory = [
-  { row: 3, col: 5, typ: "staly" },
-  { row: 6, col: 9, typ: "staly" },
-  { row: 12, col: 3, typ: "staly" },
+const zagrozenia = [
+  { row: 3, col: 5, typ: "pulapka" },
+  { row: 6, col: 9, typ: "pulapka" },
+  { row: 12, col: 3, typ: "pulapka" },
   {
     row: 7,         // aktualna pozycja
     col: 3,
@@ -57,8 +61,8 @@ const potwory = [
     dir: -1,
     speed: 0.025
   },
-  {row:16, col:10,typ:"staly"},
-   {row:12, col:12,typ:"staly"},
+  {row:16, col:10,typ:"pulapka"},
+   {row:12, col:12,typ:"pulapka"},
    {
     row:8,col:12,typ:"prawo-lewo",
     startCol:9,
@@ -66,12 +70,12 @@ const potwory = [
     dir: -1,
     speed: 0.025
    },
-   {row:1,col:18,typ:"staly"}
+   {row:1,col:18,typ:"pulapka"}
 ];
 
 
 function updateMonsters() {
-  potwory.forEach(m => {
+  zagrozenia.forEach(m => {
     if (m.typ === "gora-dol") {
       m.row += m.dir * m.speed;
 
@@ -100,7 +104,7 @@ function updateMonsters() {
 
 function rysuj() {
   
- ctx.clearRect(0, 0, area.width, area.height);
+ // ctx.clearRect(0, 0, area.width, area.height);
   
   ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
   ctx.lineWidth = 1;
@@ -120,14 +124,21 @@ function rysuj() {
 
 
   const monsterSize = size * 2.7; 
-  potwory.forEach(m => {
-    ctx.drawImage(
-      potwor,
-      m.col * size - monsterSize / 2 + (size / 2),
-      m.row * size - monsterSize / 2 + (size / 2),
-      monsterSize,
-      monsterSize
-    );
+  zagrozenia.forEach(m => {
+    if (m.typ === "pulapka") {
+      // Rysuj statyczną pułapkę
+      ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
+    } else {
+      // Rysuj ruchomego potwora
+      const monsterSize = size * 1.5; // Dopasuj wielkość
+      ctx.drawImage(
+        potwor,
+        m.col * size - monsterSize / 2 + size / 2,
+        m.row * size - monsterSize / 2 + size / 2,
+        monsterSize,
+        monsterSize
+      );
+    }
   });
 }
 
