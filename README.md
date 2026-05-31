@@ -62,35 +62,27 @@ Celem gry jest przechodzenie przez kolejne labirynty i dotarcie do wyjścia. Pod
 - Podział projektu na kilka plików  
 - Poprawne działanie w popularnych przeglądarkach internetowych
 
-##  OPIS FABUŁY
+# FABULA
 
-Wcielasz się w postać  – zaawansowanego, autonomicznego programu ratunkowego, wyposażonego w sztuczną inteligencję. Zostałeś potajemnie aktywowany w najgłębszych strukturach superkomputera megakorporacji 
-
-Twój stwórca, legendarny cyber-aktywista, został schwytany przez korporacyjne służby bezpieczeństwa. Przed całkowitym odcięciem zdołał jednak ukryć w systemie pakiety danych zawierające dowody na globalny spisek. Twoja misja to zabezpieczyć te pliki, rozwiązać sieciowe blokady logiczne i uciec z pułapki.
-
-Cała architektura sieci Mainframe'u została zablokowana i przybrała formę gigantycznego, **ciemnofioletowo-błękitnego labiryntu Klastrów Szyfrujących (Encryption Blocks)**. Jedyne bezpieczne ścieżki to czarne , którymi musisz się poruszać. 
-
-Ucieczka wymaga potężnego nakładu mocy. Każdy ruch obciąża Twój wirtualny procesor, zużywając **Staminę (Moc Obliczeniową)**. Jeśli stracisz całą **Stabilność Kodu (HP)** na skutek ataków lub doprowadzisz do przegrzania systemu z braku energii – Twój program zostanie bezpowrotnie skasowany (*Data Wipe*).
+Jesteś hakerem uwięzionym w cyfrowym labiryncie korporacji **NEON**. Twoim celem jest ucieczka. Aby otworzyć wyjście z każdego poziomu, musisz rozwiązać wszystkie zagadki logiczne. Korytarze tego miejsca są naszpikowane technologią, która nie wybacza żadnego błędu. Zostałeś tu zesłany za wykradzenie plików, które mogłyby pogrążyć całe imperium korporacji. Twoja jedyna szansa na przeżycie to bezszelestne przemykanie się między patrolami wrogich jednostek. Tylko odnalezienie drogi do centrum sterowania pozwoli Ci na trwałe usunięcie blokady i powrót do rzeczywistości.
 
 ---
 
+## ⚠️ Zagrożenia i pomoc
 
-## 🔮 CYFROWE ARTEFAKTY (ZASOBY)
+### Wrogowie
+* **Złe roboty:** Unikaj patrolujących korytarze jednostek wroga.
 
-W labiryncie rozrzucone są kluczowe pakiety danych, które pozwalają Ci utrzymać odpowiednie parametry życiowe i progresować w grze:
+### Pułapki
+* **Kapkany:** Uważaj na mechaniczne pułapki, które odbierają Twoje punkty HP.
 
-* 💚 **Kapsułki Stabilizujące (Code Stabilizers) [HP]:** Zielone pakiety, które naprawiają uszkodzone sektory pamięci podręcznej i przywracają punkty zdrowia (**HP**).
-* ⚡ **Ogniwa Energetyczne (Overclock Batteries) [STAMINA]:** Błękitne, jaskrawe kryształy, które błyskawicznie chłodzą procesor i odnawiają **Staminę**, pozwalając na dalszy, dynamiczny ruch.
-* 🔑 **Klastry Kryptograficzne (Data Keys):** Świecące dyski (klucze) niezbędne do autoryzacji i odblokowania przejść do kolejnych warstw Mainframe'u.
-* 🧠 **Deszyfratory (Decryption Decks):** Fioletowe, rotujące trójkąty. Ich zebranie uruchamia **Protokół Antywłamaniowy** – na ekranie pojawia się interfejs terminala z zagadką logiczną. Dopiero poprawna odpowiedź wyłącza lasery blokujące dalszą drogę.
+### Wsparcie
+* ❤️ **Serduszka:** Zbieraj, aby leczyć swoje HP.
+* ⚡ **Pioruny:** Zbieraj, aby odnawiać staminę niezbędną do szybkiej ucieczki.
 
----
 
-## 🚫 SYSTEMY OBRONNE (ZAGROŻENIA)
 
-* 🤖 **Strażnicy / Skanery (Sentinels):** Czerwone podprogramy patrolujące korytarze według sztywno określonych pętli kodu. Są przewidywalni, ale bezpośredni kontakt z nimi drastycznie niszczy  (-HP).
-* 👾 **Monstra (Glitch Beasts):** Zmutowane, nieprzewidywalne bestie programowe (wirusy). Potrafią wykryć obecność Skryptu, porzucić swój rewir i aktywnie ścigać gracza przez korytarze labiryntu.
----
+
 # Struktura projektu
 
 ```text
@@ -113,6 +105,7 @@ W labiryncie rozrzucone są kluczowe pakiety danych, które pozwalają Ci utrzym
 
 /skrypty
 └── movement.js
+
 
 
 
