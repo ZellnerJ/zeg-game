@@ -6,6 +6,10 @@ bloczek.src = "bloczek.jpg";
 
 const potwor = new Image();
 potwor.src = "potwor.png";
+
+const pulapka = new Image();
+pulapka.src = "pulapka.png";
+
 const size = 40;
 
 const plotno = [
@@ -35,7 +39,7 @@ const plotno = [
   [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
-const potwory=[
+const zagrozenia=[
 {row:1,
   col:5,
   startCol:1,
@@ -53,7 +57,7 @@ const potwory=[
   speed:0.03,
   typ:"prawo-lewo"
 },
-{row:1,col:19,typ:"staly"},
+{row:1,col:19,typ:"pulapka"},
 {row:9,col:19,typ:"prawo-lewo",
   startCol:17,
   dir:1,
@@ -78,13 +82,18 @@ const potwory=[
   row:9,col:1,dir:1,typ:"prawo-lewo",startCol:1,endCol:9,speed:0.023
 },
 {row:23,col:17,dir:1,typ:"prawo-lewo",startCol:15,endCol:21,speed:0.023},
-{row:21,col:15,dir:1,typ:"prawo-lewo",startCol:5,endCol:15,speed:0.023}
+{row:21,col:15,dir:1,typ:"prawo-lewo",startCol:5,endCol:15,speed:0.023},
+{row:20,col:1,typ:"pulapka"},
+{row:23, col:11,typ:"pulapka"},
+{row:12,col:13,typ:"pulapka"},
+{row:19,col:23,typ:"pulapka"},
+{row:6,col:5,typ:"pulapka"}
 ];
 
 
 
 function updateMonsters() {
-  potwory.forEach(m => {
+  zagrozenia.forEach(m => {
     if (m.typ === "gora-dol") {
       m.row += m.dir * m.speed;
 
@@ -127,17 +136,21 @@ function rysuj() {
     }
   }
   const monsterSize = 90;
-potwory.forEach(m => {
+zagrozenia.forEach(m => {
    
-    let offset = (size - monsterSize) / 2;
-    
-    ctx.drawImage(
-      potwor, 
-      m.col * size + offset, 
-      m.row * size + offset, 
-      monsterSize, 
-      monsterSize
-    );
+   if (m.typ === "pulapka") {
+      ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
+    } else {
+      
+      let offset = (size - monsterSize) / 2;
+      ctx.drawImage(
+        potwor,
+        m.col * size + offset,
+        m.row * size + offset,
+        monsterSize,
+        monsterSize
+      );
+    }
   });
 }
 
@@ -154,7 +167,7 @@ function gameLoop() {
 let loaded = 0;
 const checkReady = () => {
   loaded++;
-  if (loaded === 2) gameLoop();
+  if (loaded === 3) gameLoop();
 };
 
 bloczek.onload = checkReady;
