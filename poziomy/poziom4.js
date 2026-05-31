@@ -7,6 +7,9 @@ bloczek.src = "bloczek.jpg";
 const potwor = new Image();
 potwor.src="potwor.png";
 
+const pulapka = new Image();
+pulapka.src = "pulapka.png";
+
 const size = 38;
 
 const plotno = [
@@ -47,7 +50,7 @@ const plotno = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
- const potwory = [
+ const zagrozenia = [
   {
     row: 1,
     col: 1,
@@ -83,7 +86,16 @@ const plotno = [
  {row:33,col:7,dir:1,typ:"gora-dol",speed:0.05,startRow:27,endRow:33},
  {row:17,col:5,dir:1,typ:"gora-dol",speed:0.05,startRow:17,endRow:23},
  {row:29,col:30,dir:1,typ:"prawo-lewo",speed:0.05,startCol:27,endCol:31},
- {row:34,col:33,dir:1,typ:"gora-dol",speed:0.05,startRow:27,endRow:33}
+ {row:34,col:33,dir:1,typ:"gora-dol",speed:0.05,startRow:27,endRow:33},
+ {row:11,col:15,typ:"pulapka"},
+ {row:19,col:1,typ:"pulapka"},
+ {row:25,col:1,typ:"pulapka"},
+ {row:25,col:25,typ:"pulapka"},
+ {row:15,col:31,typ:"pulapka"},
+ {row:30,col:15,typ:"pulapka"},
+ {row:19,col:10,typ:"pulapka"},
+ {row:1,col:18,typ:"pulapka"},
+ {row:33,col:31,typ:"pulapka"}
 ];
 
 function rysuj() {
@@ -102,21 +114,24 @@ function rysuj() {
     }
   }
   const monsterSize = 90;
-potwory.forEach(m => {
-   
-    let offset = (size - monsterSize) / 2;
-    
-    ctx.drawImage(
-      potwor, 
-      m.col * size + offset, 
-      m.row * size + offset, 
-      monsterSize, 
-      monsterSize
-    );
+zagrozenia.forEach(m => {
+    if (m.typ === "pulapka") {
+      ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
+    } else {
+     
+      let offset = (size - monsterSize) / 2;
+      ctx.drawImage(
+        potwor,
+        m.col * size + offset,
+        m.row * size + offset,
+        monsterSize,
+        monsterSize
+      );
+    }
   });
 }
 function updateMonsters() {
-  potwory.forEach(m => {
+ zagrozenia.forEach(m => {
     if (m.typ === "gora-dol") {
       m.row += m.dir * m.speed;
 
@@ -151,11 +166,11 @@ function gameLoop() {
   requestAnimationFrame(gameLoop); 
 }
 
-// Uruchomienie, gdy obrazki będą gotowe
+// Uruchomienie gdy obrazki będą gotowe
 let loadedImages = 0;
 function checkImagesLoaded() {
   loadedImages++;
-  if (loadedImages === 2) {
+  if (loadedImages === 3) {
     gameLoop();
   }
 }
