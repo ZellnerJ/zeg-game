@@ -283,7 +283,7 @@ function sprawdzKolizjePotworow() {
 
     const now = Date.now();
 
-    potwory.forEach(m => {
+    zagrozenia.forEach(m => {
 
 
         const monsterSize = size ;
@@ -332,23 +332,18 @@ function sprawdzKolizjePotworow() {
 
 function gameLoop() {
 
-    ctx.clearRect(
-        0,
-        0,
-        area.width,
-        area.height
-    );
+ctx.clearRect(0, 0, area.width, area.height);
 
+   
+    rysuj(); 
+
+  
     updateMonsters();
-
-    rysuj();
-
     ruch();
-
     sprawdzKolizjePotworow();
 
+    
     rysujGracza();
-
     rysujStamine();
     rysujHP();
 
@@ -356,7 +351,6 @@ function gameLoop() {
 
     requestAnimationFrame(gameLoop);
 }
-
 bloczek.onload = function () {
 
     ustawStart();
