@@ -5,7 +5,13 @@ const bloczek = new Image();
 bloczek.src = "bloczek.jpg";
 const potwor = new Image();
 potwor.src="potwor.png";
+
+const pulapka = new Image();
+pulapka.src = "pulapka.png";
+
 const size = 35;
+
+
 
 const plotno = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -59,7 +65,7 @@ const plotno = [
   [1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
-const potwory = [
+const zagrozenia = [
  {row:5,col:5,dir:1,speed:0.03,typ:"prawo-lewo",startCol:5,endCol:9},
  {row:1,col:13,dir:1,speed:0.03,typ:"gora-dol",startRow:1,endRow:3},
  {row:7,col:7,dir:1,speed:0.06,typ:"prawo-lewo",startCol:7,endCol:19},
@@ -93,7 +99,23 @@ const potwory = [
 {row:35,col:39,speed:0.03,typ:"gora-dol",dir:1,startRow:39,endRow:47},
 {row:25,col:41,speed:0.03,typ:"gora-dol",dir:1,startRow:27,endRow:35},
 {row:43,col:48,speed:0.03,typ:"gora-dol",dir:1,startRow:43,endRow:47},
-{row:45,col:25,speed:0.03,typ:"prawo-lewo",dir:1,startCol:25,endCol:29}
+{row:45,col:25,speed:0.03,typ:"prawo-lewo",dir:1,startCol:25,endCol:29},
+//pulapki
+{row:1,col:15,typ:"pulapka"},
+{row:5,col:21,typ:"pulapka"},
+{row:19,col:1,typ:"pulapka"},
+{row:15,col:12,typ:"pulapka"},
+{row:15,col:23,typ:"pulapka"},
+{row:25,col:19,typ:"pulapka"},
+{row:25,col:35,typ:"pulapka"},
+{row:1,col:40,typ:"pulapka"},
+{row:9,col:45,typ:"pulapka"},
+{row:29,col:45,typ:"pulapka"},
+{row:40,col:29,typ:"pulapka"},
+{row:45,col:1,typ:"pulapka"},
+{row:45,col:17,typ:"pulapka"},
+{row:35,col:17,typ:"pulapka"},
+{row:45,col:45,typ:"pulapka"}
 
 ];
 
@@ -114,21 +136,24 @@ function rysuj() {
     }
   }
   const monsterSize = 90;
-potwory.forEach(m => {
-   
-    let offset = (size - monsterSize) / 2;
-    
-    ctx.drawImage(
-      potwor, 
-      m.col * size + offset, 
-      m.row * size + offset, 
-      monsterSize, 
-      monsterSize
-    );
+zagrozenia.forEach(m => {
+    if (m.typ === "pulapka") {
+      ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
+    } else {
+     
+      let offset = (size - monsterSize) / 2;
+      ctx.drawImage(
+        potwor,
+        m.col * size + offset,
+        m.row * size + offset,
+        monsterSize,
+        monsterSize
+      );
+    }
   });
 }
 function updateMonsters() {
-  potwory.forEach(m => {
+  zagrozenia.forEach(m => {
     if (m.typ === "gora-dol") {
       m.row += m.dir * m.speed;
 
@@ -167,7 +192,7 @@ function gameLoop() {
 let loadedImages = 0;
 function checkImagesLoaded() {
   loadedImages++;
-  if (loadedImages === 2) {
+  if (loadedImages === 3) {
     gameLoop();
   }
 }
