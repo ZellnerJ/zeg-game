@@ -10,6 +10,10 @@ potwor.src="potwor.png";
 const pulapka = new Image();
 pulapka.src = "pulapka.png";
 
+const zagadka = new Image();
+zagadka.src = "zagadka.png";
+
+
 const size = 38;
 
 const plotno = [
@@ -97,7 +101,12 @@ const plotno = [
  {row:1,col:18,typ:"pulapka"},
  {row:33,col:31,typ:"pulapka"}
 ];
+const zagadki = [
+  {row:32,col:1,pytanie: "Jaki jest wynik: !!true?", odp: "true"},
+  { row: 1, col: 32, pytanie: "Jak nazywamy funkcję, która wywołuje samą siebie?", odp: "rekurencyjna" },
+  { row: 33, col: 23, pytanie: "Jak nazywamy zmienną dostępną w całym programie? (globalna/lokalna)", odp: "globalna"  }
 
+]
 function rysuj() {
   ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
   ctx.lineWidth = 1;
@@ -128,6 +137,9 @@ zagrozenia.forEach(m => {
         monsterSize
       );
     }
+  });
+   zagadki.forEach(z => {
+    ctx.drawImage(zagadka, z.col * size, z.row * size, size, size);
   });
 }
 function updateMonsters() {
@@ -170,7 +182,7 @@ function gameLoop() {
 let loadedImages = 0;
 function checkImagesLoaded() {
   loadedImages++;
-  if (loadedImages === 3) {
+  if (loadedImages === 4) {
     gameLoop();
   }
 }

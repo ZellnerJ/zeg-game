@@ -9,6 +9,9 @@ potwor.src="potwor.png";
 const pulapka = new Image();
 pulapka.src = "pulapka.png";
 
+const zagadka = new Image();
+zagadka.src = "zagadka.png";
+
 const size = 35;
 
 
@@ -118,6 +121,11 @@ const zagrozenia = [
 {row:45,col:45,typ:"pulapka"}
 
 ];
+const zagadki = [
+  {row: 23, col: 3, pytanie: "Jak nazywa się metoda tablicowa dodająca nowy element na koniec tablicy?", odp: "push"},
+  { row: 17, col: 39, pytanie: "Jak nazywamy instrukcję, która wychodzi z funkcji i zwraca wartość?", odp: "return" },
+  { row: 48, col: 35, pytanie: "Jak nazywa się konsola w przeglądarce, w której sprawdzasz błędy?",  odp: "console" }
+]
 
 
 function rysuj() {
@@ -177,6 +185,9 @@ function updateMonsters() {
         m.dir = 1;  // w prawo
       }
     }
+  });
+   zagadki.forEach(z => {
+    ctx.drawImage(zagadka, z.col * size, z.row * size, size, size);
   });
 }
 
