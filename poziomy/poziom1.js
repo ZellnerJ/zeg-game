@@ -19,6 +19,12 @@ pulapka.src = "pulapka.png";
 const zagadka = new Image();
 zagadka.src = "zagadka.png";
 
+const serce = new Image();
+serce.src = "serce.png";
+
+const piorun = new Image();
+piorun.src = "stamina.png";
+
 
 // MAPA
 const plotno = [
@@ -59,6 +65,15 @@ const zagadki = [
   {row:13,col:9,pytanie:"20+20+20+7=",odp:"67"},
   {row:3,col:1,pytanie:"Jak nazywa sie typ liczbowy calkowity", odp:"int"}
 ]
+
+const bonusy = [
+  { row: 5, col: 3, typ: "hp" },
+  { row: 9, col: 7, typ: "stamina" },
+  { row: 8, col: 1, typ: "hp" },
+  { row: 13, col: 8, typ: "stamina" },
+  { row: 1, col: 12, typ: "hp" },
+  { row: 1, col: 5, typ: "stamina" }
+];
 
 // RUCH POTWORÓW
 function updateMonsters() {
@@ -115,6 +130,30 @@ zagadki.forEach(z => {
       ctx.drawImage(pulapka, z.col * size, z.row * size, size, size);
     }
   });
+
+  bonusy.forEach(b => {
+
+  if (b.typ === "hp") {
+    ctx.drawImage(
+      serce,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+  if (b.typ === "stamina") {
+    ctx.drawImage(
+      piorun,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+});
 }
 
 function loop() {

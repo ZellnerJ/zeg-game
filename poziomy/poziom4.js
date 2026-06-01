@@ -13,6 +13,12 @@ pulapka.src = "pulapka.png";
 const zagadka = new Image();
 zagadka.src = "zagadka.png";
 
+const serce = new Image();
+serce.src = "serce.png";
+
+const piorun = new Image();
+piorun.src = "stamina.png";
+
 
 const size = 38;
 
@@ -107,6 +113,24 @@ const zagadki = [
   { row: 33, col: 23, pytanie: "Jak nazywamy zmienną dostępną w całym programie? (globalna/lokalna)", odp: "globalna"  }
 
 ]
+
+const bonusy = [
+ { row: 5, col: 3, typ: "hp" },
+  { row: 9, col: 7, typ: "stamina" },
+  { row: 33, col: 5, typ: "hp" },
+  { row: 33, col: 15, typ: "stamina" },
+  { row: 1, col: 21, typ: "hp" },
+  { row: 9, col: 13, typ: "stamina" },
+  { row: 17, col: 15, typ: "hp" },
+  { row: 21, col: 29, typ: "stamina" },
+  { row: 9, col: 29, typ: "hp" },
+  { row: 15, col: 22, typ: "stamina" },
+  { row: 33, col: 25, typ: "hp" },
+  { row: 23, col: 18, typ: "stamina" },
+  
+];
+
+
 function rysuj() {
   ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
   ctx.lineWidth = 1;
@@ -168,6 +192,30 @@ function updateMonsters() {
       }
     }
   });
+
+  bonusy.forEach(b => {
+
+  if (b.typ === "hp") {
+    ctx.drawImage(
+      serce,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+  if (b.typ === "stamina") {
+    ctx.drawImage(
+      piorun,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+});
 }
 
 

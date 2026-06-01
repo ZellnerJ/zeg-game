@@ -12,6 +12,12 @@ pulapka.src = "pulapka.png";
 const zagadka = new Image();
 zagadka.src = "zagadka.png";
 
+const serce = new Image();
+serce.src = "serce.png";
+
+const piorun = new Image();
+piorun.src = "stamina.png";
+
 const size = 35;
 
 
@@ -127,6 +133,27 @@ const zagadki = [
   { row: 48, col: 35, pytanie: "Jak nazywa się konsola w przeglądarce, w której sprawdzasz błędy?",  odp: "console" }
 ]
 
+const bonusy = [
+ { row: 5, col: 3, typ: "hp" },
+  { row: 9, col: 7, typ: "stamina" },
+  { row: 33, col: 5, typ: "hp" },
+  { row: 33, col: 15, typ: "stamina" },
+  { row: 1, col: 21, typ: "hp" },
+  { row: 9, col: 13, typ: "stamina" },
+  { row: 17, col: 15, typ: "hp" },
+  { row: 21, col: 29, typ: "stamina" },
+  { row: 9, col: 29, typ: "hp" },
+  { row: 15, col: 21, typ: "stamina" },
+  { row: 33, col: 25, typ: "hp" },
+  { row: 23, col: 18, typ: "stamina" },
+  { row: 47, col: 8, typ: "hp" },
+  { row: 5, col: 43, typ: "stamina" },
+  { row: 36, col: 21, typ: "hp" },
+  { row: 33, col: 45, typ: "stamina" },
+  { row: 48, col: 27, typ: "hp" },
+  { row: 48, col: 25, typ: "stamina" },
+];
+
 
 function rysuj() {
   ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
@@ -189,6 +216,30 @@ function updateMonsters() {
    zagadki.forEach(z => {
     ctx.drawImage(zagadka, z.col * size, z.row * size, size, size);
   });
+
+  bonusy.forEach(b => {
+
+  if (b.typ === "hp") {
+    ctx.drawImage(
+      serce,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+  if (b.typ === "stamina") {
+    ctx.drawImage(
+      piorun,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+});
 }
 
 

@@ -3,7 +3,6 @@ console.log(plotno);
 console.log(size);
 
 
-
 const keys = {};
 
 const gracz = {
@@ -192,7 +191,7 @@ function rysujStamine() {
     const width = 220;
     const height = 20;
 
-    const x = 8;
+    const x = 20;
     const y = 3;
 
     // tło
@@ -359,6 +358,47 @@ window.sprawdzOdpowiedz = function() {
     }
 };
 
+function sprawdzBonusy() {
+
+    const graczCol = Math.floor(gracz.x / size);
+    const graczRow = Math.floor(gracz.y / size);
+
+    for (let i = bonusy.length - 1; i >= 0; i--) {
+
+        const b = bonusy[i];
+
+        if (
+            graczCol === b.col &&
+            graczRow === b.row
+        ) {
+
+            if (b.typ === "hp") {
+
+                gracz.hp += 25;
+
+                if (gracz.hp > gracz.maxHp) {
+                    gracz.hp = gracz.maxHp;
+                }
+
+                console.log("Zebrano serce");
+            }
+
+            if (b.typ === "stamina") {
+
+                gracz.stamina += 30;
+
+                if (gracz.stamina > gracz.maxStamina) {
+                    gracz.stamina = gracz.maxStamina;
+                }
+
+                console.log("Zebrano piorun");
+            }
+
+            bonusy.splice(i, 1);
+        }
+    }
+}
+
 function gameLoop() {
 
 ctx.clearRect(0, 0, area.width, area.height);
@@ -369,6 +409,7 @@ ctx.clearRect(0, 0, area.width, area.height);
   
     updateMonsters();
     ruch();
+    sprawdzBonusy();
     sprawdzKolizjePotworow();
     sprawdzZagadki();
 

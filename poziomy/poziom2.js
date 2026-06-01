@@ -13,6 +13,12 @@ pulapka.src = "pulapka.png";
 const zagadka = new Image();
 zagadka.src = "zagadka.png";
 
+const serce = new Image();
+serce.src = "serce.png";
+
+const piorun = new Image();
+piorun.src = "stamina.png";
+
 
 const size = 40; 
 
@@ -80,6 +86,18 @@ const zagadki = [
   {row:18,col:9,pytanie:"Wynik działania 10 / 3 w języku programowania (przy liczbach całkowitych) to:",odp:"3"},
   {row:3,col:15,pytanie:"Jaki operator logiczny zwraca prawdę tylko wtedy, gdy oba argumenty są prawdziwe?", odp:"&&"}
 ]
+
+const bonusy = [
+  { row: 3, col: 1, typ: "hp" },
+  { row: 9, col: 7, typ: "stamina" },
+  { row: 8, col: 1, typ: "hp" },
+  { row: 18, col: 7, typ: "stamina" },
+  { row: 1, col: 13, typ: "hp" },
+  { row: 1, col: 5, typ: "stamina" },
+  { row: 18, col: 1, typ: "hp" },
+  { row: 13, col: 9, typ: "stamina" },
+  { row: 8, col: 16, typ: "stamina" }
+];
 
 
 function updateMonsters() {
@@ -150,6 +168,30 @@ zagadki.forEach(z => {
       );
     }
   });
+
+  bonusy.forEach(b => {
+
+  if (b.typ === "hp") {
+    ctx.drawImage(
+      serce,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+  if (b.typ === "stamina") {
+    ctx.drawImage(
+      piorun,
+      b.col * size,
+      b.row * size,
+      size,
+      size
+    );
+  }
+
+});
 }
 
 bloczek.onload = function() {
