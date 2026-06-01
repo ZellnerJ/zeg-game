@@ -103,14 +103,7 @@ function ruch() {
     const now = Date.now();
 
     const moving =
-        keys["w"] ||
-        keys["a"] ||
-        keys["s"] ||
-        keys["d"] ||
-        keys["arrowup"] ||
-        keys["arrowdown"] ||
-        keys["arrowleft"] ||
-        keys["arrowright"];
+        keys["w"] ||  keys["a"] ||  keys["s"] || keys["d"] || keys["arrowup"] ||keys["arrowdown"] || keys["arrowleft"] || keys["arrowright"];
 
     const sprint =
         keys["shift"] &&
@@ -330,6 +323,8 @@ function sprawdzKolizjePotworow() {
     });
 }
 
+
+
 function gameLoop() {
 
 ctx.clearRect(0, 0, area.width, area.height);
@@ -341,6 +336,7 @@ ctx.clearRect(0, 0, area.width, area.height);
     updateMonsters();
     ruch();
     sprawdzKolizjePotworow();
+    sprawdzZagadki();
 
     
     rysujGracza();
