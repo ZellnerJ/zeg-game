@@ -10,6 +10,9 @@ potwor.src = "potwor.png";
 const pulapka = new Image();
 pulapka.src = "pulapka.png";
 
+const zagadka = new Image();
+zagadka.src = "zagadka.png";
+
 
 const size = 40; 
 
@@ -72,6 +75,11 @@ const zagrozenia = [
    },
    {row:1,col:18,typ:"pulapka"}
 ];
+const zagadki = [
+  {row:13,col:1, pytanie: "Jak nazywa się pojedynczy znak tekstu w języku C++",odp: "char"},
+  {row:18,col:9,pytanie:"Wynik działania 10 / 3 w języku programowania (przy liczbach całkowitych) to:",odp:"3"},
+  {row:3,col:15,pytanie:"Jaki operator logiczny zwraca prawdę tylko wtedy, gdy oba argumenty są prawdziwe?", odp:"&&"}
+]
 
 
 function updateMonsters() {
@@ -122,7 +130,9 @@ function rysuj() {
     }
   }
 
-
+zagadki.forEach(z => {
+    ctx.drawImage(zagadka, z.col * size, z.row * size, size, size);
+  });
   const monsterSize = size * 2.7; 
   zagrozenia.forEach(m => {
     if (m.typ === "pulapka") {

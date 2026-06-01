@@ -10,6 +10,9 @@ potwor.src = "potwor.png";
 const pulapka = new Image();
 pulapka.src = "pulapka.png";
 
+const zagadka = new Image();
+zagadka.src = "zagadka.png";
+
 const size = 40;
 
 const plotno = [
@@ -90,7 +93,11 @@ const zagrozenia=[
 {row:6,col:5,typ:"pulapka"}
 ];
 
-
+const zagadki = [
+  {row:23,col:7,pytanie:"Ile razy wykona się pętla for (let i = 0; i < 5; i++)?",odp:"5"},
+  {row:1,col:23,pytanie:"Jaki indeks ma ostatni element 3-elementowej tablicy?",odp:"2"},
+  {row:19,col:15,pytanie:"Co zwróci JavaScript dla operacji: '5' + 5?",odp:"55"}
+]
 
 function updateMonsters() {
   zagrozenia.forEach(m => {
@@ -152,6 +159,9 @@ zagrozenia.forEach(m => {
       );
     }
   });
+  zagadki.forEach(z => {
+    ctx.drawImage(zagadka, z.col * size, z.row * size, size, size);
+  });
 }
 
 
@@ -167,8 +177,10 @@ function gameLoop() {
 let loaded = 0;
 const checkReady = () => {
   loaded++;
-  if (loaded === 3) gameLoop();
+  if (loaded === 4) gameLoop();
 };
 
 bloczek.onload = checkReady;
 potwor.onload = checkReady;
+pulapka.onload = checkReady; 
+zagadka.onload = checkReady; 

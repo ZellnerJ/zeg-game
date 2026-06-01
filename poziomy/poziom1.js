@@ -116,44 +116,7 @@ zagadki.forEach(z => {
     }
   });
 }
- let biezacaZagadka = null;
 
-// Funkcja sprawdzająca kolizję z zagadką
-function sprawdzZagadki() {
-   
-    if (document.getElementById("zagadka").style.display === "flex") return;
-
-    zagadki.forEach((z, index) => {
-        const graczCol = Math.floor(gracz.x / size); // oblicza w jakiej kolumnie stoi gracz
-        const graczRow = Math.floor(gracz.y / size); // oblicza w jakim wierszu stoi gracz
-
-        if (graczCol === z.col && graczRow === z.row) {
-            biezacaZagadka = { ...z, index }; // ...z zawiera row col pytanie odp
-            document.getElementById("pytanieA").innerText = z.pytanie; //wstawia tresc pytania
-            document.getElementById("zagadka").style.display = "flex"; //zmienia stan okienka na widoczny
-            document.getElementById("odpowiedz").focus(); // ustawia kursor w polu tekstowym
-        }
-    });
-}
-
-
-window.sprawdzOdpowiedz = function() {
-    const input = document.getElementById("odpowiedz");
-    const wartosc = input.value.trim().toLowerCase();
-    
-    if (biezacaZagadka && wartosc === biezacaZagadka.odp.toLowerCase()) { //tu jest sprawdzenie odpowiedzi
-        alert("Brawo! Poprawna odpowiedź.");
-        
-       
-        document.getElementById("zagadka").style.display = "none";
-        input.value = "";
-
-        zagadki.splice(biezacaZagadka.index, 1); // usuwa zagadke z tablicy
-        biezacaZagadka = null;
-    } else {
-        alert("Błędna odpowiedź, spróbuj ponownie!");
-    }
-};
 function loop() {
   console.log("dziala");
 
