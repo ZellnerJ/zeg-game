@@ -1,7 +1,8 @@
 console.log("movement działa");
 console.log(plotno);
 console.log(size);
-
+let odgZagadki = 0; // Licznik poprawnych odpowiedzi
+const maxZagadek = 3;
 
 const keys = {};
 
@@ -34,7 +35,7 @@ const gracz = {
 hp: 100,
 maxHp: 100,
 
-damageCooldown: 500,
+damageCooldown: 2000,
 lastDamageTime: 0
 };
 
@@ -83,10 +84,7 @@ function kolizja(x, y) {
     const bottom = Math.floor((y + gracz.height) / size);
 
     return (
-        plotno[top]?.[left] === 1 ||
-        plotno[top]?.[right] === 1 ||
-        plotno[bottom]?.[left] === 1 ||
-        plotno[bottom]?.[right] === 1
+        plotno[top]?.[left] === 1 || plotno[top]?.[right] === 1 || plotno[bottom]?.[left] === 1 || plotno[bottom]?.[right] === 1
     );
 }
 
@@ -258,19 +256,41 @@ function rysujHP() {
 //Szukanie wyjścia
 
 function sprawdzWyjscie() {
-
     const col = Math.floor(gracz.x / size);
     const row = Math.floor(gracz.y / size);
 
-    if (
-        col >= plotno[0].length - 1 &&
-        plotno[row][col] === 0
-    ) {
+    if (col >= plotno[0].length - 1 && plotno[row][col] === 0) {
+        
+        if (odgZagadki >= maxZagadek) {
+            console.log("Wykryto koniec poziomu");
+            
+            // Pobiera nazwę obecnego pliku
+            const path = window.location.pathname;
+            // Rozbija ścieżkę na części i wyciąga ostatni element
+            const page = path.split("/").pop(); 
+            
+            // Wyciągamy numer poziomu
+            const match = page.match(/poziom(\d+)\.html/);
+            
+            if (match) {
+                // Konwertuje znaleziony tekst  na typ liczbowy
+                const currentLevel = parseInt(match[1]);
+                const nextLevel = currentLevel + 1;
 
-        console.log("Wykryto koniec poziomu");
+                if (nextLevel <= 5) {
+                    alert("Gratulacje! Przechodzisz do poziomu " + nextLevel);
+                    window.location.href = "poziom" + nextLevel + ".html";
+                } else {
+                    alert("Gratulacje! Ukończyłeś całą grę!");
+                    window.location.href = "index.html"; // Powrót do menu
+                }
+            }
+        } else {
+            alert("Nie możesz wyjść! Rozwiąż wszystkie " + maxZagadek + " zagadki.");
+            gracz.x -= size; 
+        }
     }
 }
-
 function sprawdzKolizjePotworow() {
 
     const now = Date.now();
@@ -344,15 +364,18 @@ window.sprawdzOdpowiedz = function() {
     const input = document.getElementById("odpowiedz");
     const wartosc = input.value.trim().toLowerCase();
     
-    if (biezacaZagadka && wartosc === biezacaZagadka.odp.toLowerCase()) { //tu jest sprawdzenie odpowiedzi
+    if (biezacaZagadka && wartosc === biezacaZagadka.odp.toLowerCase()) {
         alert("Brawo! Poprawna odpowiedź.");
         
-       
+        odgZagadki++; 
+        
         document.getElementById("zagadka").style.display = "none";
         input.value = "";
-
-        zagadki.splice(biezacaZagadka.index, 1); // usuwa zagadke z tablicy
+        zagadki.splice(biezacaZagadka.index, 1);
         biezacaZagadka = null;
+        
+
+        console.log("Zagadki rozwiązane: " + odgZagadki + "/" + maxZagadek);
     } else {
         alert("Błędna odpowiedź, spróbuj ponownie!");
     }
