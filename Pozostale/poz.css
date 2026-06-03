@@ -1,10 +1,10 @@
-/* --- UKŁAD (Layout) --- */
 body {
     background-color: #050508; 
     margin: 0;
     padding: 0;
     height: 100vh;
     font-family: 'Courier New', Courier, monospace;
+    -webkit-font-smoothing: antialiased;
     overflow: hidden;
 }
 
@@ -22,6 +22,7 @@ body {
     color: #00ffff;
     text-transform: uppercase;
     text-shadow: 0 0 10px #00ffff;
+    letter-spacing: 4px; 
 }
 
 .przyciski {
@@ -32,8 +33,9 @@ body {
     width: 100%;
 }
 
-
 .b {
+    display: inline-block; 
+    text-decoration: none; 
     background: transparent;
     font-family: 'Courier New', Courier, monospace;
     font-size: 28px;
@@ -43,6 +45,22 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-align: center;
+    box-sizing: border-box; 
+}
+
+
+.wyjscie {
+    margin-top: 20px; 
+    color: #ff3333;
+    border: 3px solid #ff3333;
+    box-shadow: 0 0 10px #ff3333;
+}
+
+.wyjscie:hover {
+    background-color: #ff3333;
+    color: #050508;
+    box-shadow: 0 0 30px #ff3333;
 }
 
 .poz {
@@ -55,17 +73,4 @@ body {
     background-color: #00ffff;
     color: #050508;
     box-shadow: 0 0 30px #00ffff;
-}
-
-
-.wyjscie {
-    color: #ff3333;
-    border: 3px solid #ff3333;
-    box-shadow: 0 0 10px #ff3333;
-}
-
-.wyjscie:hover {
-    background-color: #ff3333;
-    color: #050508;
-    box-shadow: 0 0 30px #ff3333;
 }
