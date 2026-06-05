@@ -1,0 +1,272 @@
+const area = document.querySelector(".area");
+const ctx = area.getContext("2d");
+
+const wylaczPotwory = localStorage.getItem("wylaczPotwory") === "true";
+const wylaczPulapki = localStorage.getItem("wylaczPulapki") === "true";
+const wylaczHP = localStorage.getItem("wylaczHP") === "true";
+const wylaczStamine = localStorage.getItem("wylaczStamine") === "true";
+
+const bloczek = new Image();
+bloczek.src = "bloczek.jpg";
+
+const potwor = new Image();
+potwor.src = "potwor.png";
+
+const pulapka = new Image();
+pulapka.src = "pulapka.png";
+
+const zagadka = new Image();
+zagadka.src = "zagadka.png";
+
+const serce = new Image();
+serce.src = "serce.png";
+
+const piorun = new Image();
+piorun.src = "stamina.png";
+
+const size = 40;
+
+const plotno = [
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+  [0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+  [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
+  [1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
+  [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
+  [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+];
+const zagrozenia=[
+{row:1,
+  col:5,
+  startCol:1,
+  endCol:3,
+  typ:"prawo-lewo",
+  dir: 1,
+  speed: 0.025
+},
+{
+  row:1,
+  col:7,
+  startCol:5,
+  endCol:17,
+  dir:1,
+  speed:0.03,
+  typ:"prawo-lewo"
+},
+{row:1,col:19,typ:"pulapka"},
+{row:9,col:19,typ:"prawo-lewo",
+  startCol:17,
+  dir:1,
+  endCol:23,
+  speed:0.02
+},
+{
+  row:7,
+  col:20,
+  dir:1,
+  startCol:19,
+  endCol:21,
+  speed:0.02,
+  typ:"prawo-lewo"
+},
+{row:20,col:19,dir:1,typ:"gora-dol",startRow:15,endRow:23,speed:0.02},
+{row:12,col:4,dir:1,typ:"gora-dol",startRow:15,endRow:17,speed:0.017},
+{row:7,col:17,dir:1,typ:"gora-dol",startRow:7,endRow:13,speed:0.02},
+{row:15,col:10,dir:1,typ:"prawo-lewo",startCol:9,endCol:21,speed:0.04},
+{row:1,col:13,dir:1,typ:"gora-dol",startRow:1,endRow:7,speed:0.02},
+{
+  row:9,col:1,dir:1,typ:"prawo-lewo",startCol:1,endCol:9,speed:0.023
+},
+{row:23,col:17,dir:1,typ:"prawo-lewo",startCol:15,endCol:21,speed:0.023},
+{row:21,col:15,dir:1,typ:"prawo-lewo",startCol:5,endCol:15,speed:0.023},
+{row:20,col:1,typ:"pulapka"},
+{row:23, col:11,typ:"pulapka"},
+{row:12,col:13,typ:"pulapka"},
+{row:19,col:23,typ:"pulapka"},
+{row:6,col:5,typ:"pulapka"}
+];
+
+const zagadki = [
+  {row:23,col:7,pytanie:"Ile razy wykona się pętla for (let i = 0; i < 5; i++)?",odp:"5"},
+  {row:1,col:23,pytanie:"Jaki indeks ma ostatni element 3-elementowej tablicy?",odp:"2"},
+  {row:19,col:15,pytanie:"Co zwróci JavaScript dla operacji: '5' + 5?",odp:"55"}
+]
+
+const bonusy = [
+  { row: 5, col: 3, typ: "hp" },
+  { row: 9, col: 7, typ: "stamina" },
+  { row: 8, col: 1, typ: "hp" },
+  { row: 13, col: 8, typ: "stamina" },
+  { row: 1, col: 12, typ: "hp" },
+  { row: 1, col: 5, typ: "stamina" },
+  { row: 15, col: 3, typ: "hp" },
+  { row: 1, col: 21, typ: "stamina" },
+  { row: 15, col: 23, typ: "hp" },
+  { row: 23, col: 13, typ: "stamina" },
+   { row: 19, col: 14, typ: "hp" },
+  { row: 23, col: 1, typ: "stamina" }
+  
+];
+
+function updateMonsters() {
+  zagrozenia.forEach(m => {
+    if (m.typ === "gora-dol") {
+      m.row += m.dir * m.speed;
+
+    
+      if (m.row >= m.endRow) {
+        m.row = m.endRow;
+        m.dir = -1; 
+      } else if (m.row <= m.startRow) {
+        m.row = m.startRow;
+        m.dir = 1;  
+      }
+    }
+  else if (m.typ == "prawo-lewo") {
+      m.col += m.dir * m.speed;
+
+      if (m.col >= m.endCol) {
+        m.col = m.endCol;
+        m.dir = -1; // w lewo
+      } else if (m.col <= m.startCol) {
+        m.col = m.startCol;
+        m.dir = 1;  // w prawo
+      }
+    }
+  });
+}
+
+function rysuj() {
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+  ctx.lineWidth = 1;
+
+  // MAPA
+  for (let row = 0; row < plotno.length; row++) {
+    for (let col = 0; col < plotno[row].length; col++) {
+
+      if (plotno[row][col] == 1) {
+        ctx.drawImage(bloczek, col * size, row * size, size, size);
+      } else {
+        ctx.fillStyle = "black";
+        ctx.fillRect(col * size, row * size, size, size);
+      }
+
+      ctx.strokeRect(col * size, row * size, size, size);
+    }
+  }
+
+  // POTWORY + PUŁAPKI
+  const monsterSize = 90;
+
+  zagrozenia.forEach(m => {
+
+    // PUŁAPKI
+    if (m.typ === "pulapka") {
+      if (!wylaczPulapki) {
+        ctx.drawImage(
+          pulapka,
+          m.col * size,
+          m.row * size,
+          size,
+          size
+        );
+      }
+    }
+
+    // POTWORY / RUCHOME ZAGROŻENIA
+    else {
+      if (!wylaczPotwory) {
+        let offset = (size - monsterSize) / 2;
+
+        ctx.drawImage(
+          potwor,
+          m.col * size + offset,
+          m.row * size + offset,
+          monsterSize,
+          monsterSize
+        );
+      }
+    }
+  });
+
+  // ZAGADKI
+  zagadki.forEach(z => {
+    ctx.drawImage(
+      zagadka,
+      z.col * size,
+      z.row * size,
+      size,
+      size
+    );
+  });
+
+  // BONUSY
+  bonusy.forEach(b => {
+
+    // HP
+    if (b.typ === "hp") {
+      if (!wylaczHP) {
+        ctx.drawImage(
+          serce,
+          b.col * size,
+          b.row * size,
+          size,
+          size
+        );
+      }
+    }
+
+    // STAMINA
+    if (b.typ === "stamina") {
+      if (!wylaczStamine) {
+        ctx.drawImage(
+          piorun,
+          b.col * size,
+          b.row * size,
+          size,
+          size
+        );
+      }
+    }
+
+  });
+}
+
+
+  
+function gameLoop() {
+  updateMonsters();
+  ctx.clearRect(0, 0, area.width, area.height); 
+  rysuj(); 
+  requestAnimationFrame(gameLoop);
+}
+
+
+let loaded = 0;
+const checkReady = () => {
+  loaded++;
+  if (loaded === 4) gameLoop();
+};
+
+bloczek.onload = checkReady;
+potwor.onload = checkReady;
+pulapka.onload = checkReady; 
+zagadka.onload = checkReady; 

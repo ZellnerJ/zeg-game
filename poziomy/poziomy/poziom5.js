@@ -1,0 +1,262 @@
+const area = document.querySelector(".area");
+const ctx = area.getContext("2d");
+
+const wylaczPotwory = localStorage.getItem("wylaczPotwory") === "true";
+const wylaczPulapki = localStorage.getItem("wylaczPulapki") === "true";
+const wylaczHP = localStorage.getItem("wylaczHP") === "true";
+const wylaczStamine = localStorage.getItem("wylaczStamine") === "true";
+
+const bloczek = new Image();
+bloczek.src = "bloczek.jpg";
+const potwor = new Image();
+potwor.src="potwor.png";
+
+const pulapka = new Image();
+pulapka.src = "pulapka.png";
+
+const zagadka = new Image();
+zagadka.src = "zagadka.png";
+
+const serce = new Image();
+serce.src = "serce.png";
+
+const piorun = new Image();
+piorun.src = "stamina.png";
+
+const size = 35;
+
+
+
+const plotno = [
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+  [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+  [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+  [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1],
+  [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+  [1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1],
+  [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1],
+  [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1],
+  [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+  [1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+  [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1],
+  [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+  [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+  [1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+  [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+];
+const zagrozenia = [
+ {row:5,col:5,dir:1,speed:0.03,typ:"prawo-lewo",startCol:5,endCol:9},
+ {row:1,col:13,dir:1,speed:0.03,typ:"gora-dol",startRow:1,endRow:3},
+ {row:7,col:7,dir:1,speed:0.06,typ:"prawo-lewo",startCol:7,endCol:19},
+ {row:15,col:3,dir:1,speed:0.061,typ:"gora-dol",startRow:11,endRow:19},
+ {row:5,col:11,speed:0.06,typ:"prawo-lewo",startCol:11, endCol:17,dir:1},
+ {row:11,col:9,speed:0.08,typ:"prawo-lewo",dir:1,startCol:9,endCol:13},
+ {row:14,col:11,speed:0.06,typ:"gora-dol",dir:1,startRow:15,endRow:19},
+{row:25,col:15,speed:0.06,typ:"prawo-lewo",dir:1,startCol:15,endCol:23},
+{row:23,col:7,speed:0.06,typ:"prawo-lewo",dir:1,startCol:5,endCol:11},
+{row:19,col:5,speed:0.03,typ:"prawo-lewo",dir:1,startCol:5,endCol:9},
+{row:25,col:1,speed:0.04,typ:"prawo-lewo",dir:1,startCol:1,endCol:5}, // gdzies tu dodamy zagadke
+{row:28,col:1,speed:0.05,typ:"prawo-lewo",dir:1,startCol:1,endCol:5},
+{row:3,col:25,speed:0.05,typ:"prawo-lewo",dir:1,startCol:25,endCol:27},
+{row:5,col:23,speed:0.05,typ:"prawo-lewo",dir:1,startCol:23,endCol:27},
+{row:1,col:29,speed:0.05,typ:"gora-dol",dir:1,startRow:1,endRow:9},
+{row:13,col:17,speed:0.04,typ:"prawo-lewo",dir:1,startCol:17,endCol:25},
+{row:9,col:35,speed:0.02,typ:"gora-dol",dir:1,startRow:9,endRow:15},
+{row:13,col:27,speed:0.03,typ:"prawo-lewo",dir:1,startCol:27,endCol:34},
+{row:17,col:25,speed:0.04,typ:"gora-dol",dir:1,startRow:17,endRow:21},
+{row:7,col:41,speed:0.04,typ:"prawo-lewo",dir:1,startCol:41,endCol:48},
+{row:9,col:48,speed:0.02,typ:"gora-dol",dir:1,startRow:9,endRow:15},
+{row:17,col:45,speed:0.03,typ:"gora-dol",dir:1,startRow:17, endRow:23},
+{row:23,col:25,speed:0.03,typ:"prawo-lewo",dir:1,startCol:25,endCol:31},
+{row:25,col:39,speed:0.02,typ:"prawo-lewo",dir:1,startCol:39,endCol:48},
+{row:37,col:9,speed:0.03,typ:"gora-dol",dir:1,startRow:37,endRow:43},
+{row:45,col:7,speed:0.03,typ:"gora-dol",dir:1,startRow:45,endRow:48},
+{row:39,col:1,speed:0.02,typ:"prawo-lewo",dir:1,startCol:1,endCol:3},
+{row:37,col:1,speed:0.03,typ:"prawo-lewo",dir:1,startCol:1,endCol:3},
+{row:35,col:19,speed:0.03,typ:"gora-dol",dir:1,startRow:35,endRow:43},
+{row:32,col:29,speed:0.03,typ:"prawo-lewo",dir:1,startCol:29,endCol:31},
+{row:35,col:39,speed:0.03,typ:"gora-dol",dir:1,startRow:39,endRow:47},
+{row:25,col:41,speed:0.03,typ:"gora-dol",dir:1,startRow:27,endRow:35},
+{row:43,col:48,speed:0.03,typ:"gora-dol",dir:1,startRow:43,endRow:47},
+{row:45,col:25,speed:0.03,typ:"prawo-lewo",dir:1,startCol:25,endCol:29},
+//pulapki
+{row:1,col:15,typ:"pulapka"},
+{row:5,col:21,typ:"pulapka"},
+{row:19,col:1,typ:"pulapka"},
+{row:15,col:12,typ:"pulapka"},
+{row:15,col:23,typ:"pulapka"},
+{row:25,col:19,typ:"pulapka"},
+{row:25,col:35,typ:"pulapka"},
+{row:1,col:40,typ:"pulapka"},
+{row:9,col:45,typ:"pulapka"},
+{row:29,col:45,typ:"pulapka"},
+{row:40,col:29,typ:"pulapka"},
+{row:45,col:1,typ:"pulapka"},
+{row:45,col:17,typ:"pulapka"},
+{row:35,col:17,typ:"pulapka"},
+{row:45,col:45,typ:"pulapka"}
+
+];
+const zagadki = [
+  {row: 23, col: 3, pytanie: "Jak nazywa się metoda tablicowa dodająca nowy element na koniec tablicy?", odp: "push"},
+  { row: 17, col: 39, pytanie: "Jak nazywamy instrukcję, która wychodzi z funkcji i zwraca wartość?", odp: "return" },
+  { row: 48, col: 35, pytanie: "Jak nazywa się konsola w przeglądarce, w której sprawdzasz błędy?",  odp: "console" }
+]
+
+const bonusy = [
+ { row: 5, col: 3, typ: "hp" },
+  { row: 9, col: 7, typ: "stamina" },
+  { row: 33, col: 5, typ: "hp" },
+  { row: 33, col: 15, typ: "stamina" },
+  { row: 1, col: 21, typ: "hp" },
+  { row: 9, col: 13, typ: "stamina" },
+  { row: 17, col: 15, typ: "hp" },
+  { row: 21, col: 29, typ: "stamina" },
+  { row: 9, col: 29, typ: "hp" },
+  { row: 15, col: 21, typ: "stamina" },
+  { row: 33, col: 25, typ: "hp" },
+  { row: 23, col: 18, typ: "stamina" },
+  { row: 47, col: 8, typ: "hp" },
+  { row: 5, col: 43, typ: "stamina" },
+  { row: 36, col: 21, typ: "hp" },
+  { row: 33, col: 45, typ: "stamina" },
+  { row: 48, col: 27, typ: "hp" },
+  { row: 48, col: 25, typ: "stamina" },
+];
+
+
+function rysuj() {
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+  ctx.lineWidth = 1;
+
+  for (let row = 0; row < plotno.length; row++) {
+    for (let col = 0; col < plotno[row].length; col++) {
+      if (plotno[row][col] == 1) {
+        ctx.drawImage(bloczek, col * size, row * size, size, size);
+      } else {
+        ctx.fillStyle = "black";
+        ctx.fillRect(col * size, row * size, size, size);
+      }
+      ctx.strokeRect(col * size, row * size, size, size);
+    }
+  }
+
+  const monsterSize = 90;
+
+  zagrozenia.forEach(m => {
+    if (m.typ === "pulapka") {
+      if (wylaczPulapki !== true) {
+        ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
+      }
+    } else {
+      if (wylaczPotwory !== true) {
+        let offset = (size - monsterSize) / 2;
+
+        ctx.drawImage(
+          potwor,
+          m.col * size + offset,
+          m.row * size + offset,
+          monsterSize,
+          monsterSize
+        );
+      }
+    }
+  });
+
+  bonusy.forEach(b => {
+    if (b.typ === "hp") {
+      if (wylaczHP !== true) {
+        ctx.drawImage(serce, b.col * size, b.row * size, size, size);
+      }
+    }
+
+    if (b.typ === "stamina") {
+      if (wylaczStamine !== true) {
+        ctx.drawImage(piorun, b.col * size, b.row * size, size, size);
+      }
+    }
+  });
+}
+
+
+function updateMonsters() {
+  zagrozenia.forEach(m => {
+    if (m.typ === "gora-dol") {
+      m.row += m.dir * m.speed;
+
+      if (m.row >= m.endRow) {
+        m.row = m.endRow;
+        m.dir = -1;
+      } else if (m.row <= m.startRow) {
+        m.row = m.startRow;
+        m.dir = 1;
+      }
+
+    } else if (m.typ === "prawo-lewo") {
+      m.col += m.dir * m.speed;
+
+      if (m.col >= m.endCol) {
+        m.col = m.endCol;
+        m.dir = -1;
+      } else if (m.col <= m.startCol) {
+        m.col = m.startCol;
+        m.dir = 1;
+      }
+    }
+  });
+}
+
+
+function gameLoop() {
+  updateMonsters(); 
+  ctx.clearRect(0, 0, area.width, area.height);
+  rysuj(); 
+  requestAnimationFrame(gameLoop); 
+}
+
+// Uruchomienie gdy obrazki będą gotowe
+let loadedImages = 0;
+function checkImagesLoaded() {
+  loadedImages++;
+  if (loadedImages === 3) {
+    gameLoop();
+  }
+}
+
+bloczek.onload = checkImagesLoaded;
+potwor.onload = checkImagesLoaded;
