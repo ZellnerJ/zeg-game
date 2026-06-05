@@ -1,6 +1,11 @@
 const area = document.querySelector(".area");
 const ctx = area.getContext("2d");
 
+const wylaczPotwory = localStorage.getItem("wylaczPotwory") === "true";
+const wylaczPulapki = localStorage.getItem("wylaczPulapki") === "true";
+const wylaczHP = localStorage.getItem("wylaczHP") === "true";
+const wylaczStamine = localStorage.getItem("wylaczStamine") === "true";
+
 const bloczek = new Image();
 bloczek.src = "bloczek.jpg";
 
@@ -153,61 +158,96 @@ function rysuj() {
   ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
   ctx.lineWidth = 1;
 
+  // MAPA
   for (let row = 0; row < plotno.length; row++) {
     for (let col = 0; col < plotno[row].length; col++) {
+
       if (plotno[row][col] == 1) {
         ctx.drawImage(bloczek, col * size, row * size, size, size);
       } else {
         ctx.fillStyle = "black";
         ctx.fillRect(col * size, row * size, size, size);
       }
+
       ctx.strokeRect(col * size, row * size, size, size);
     }
   }
+
+  // POTWORY + PUŁAPKI
   const monsterSize = 90;
-zagrozenia.forEach(m => {
-   
-   if (m.typ === "pulapka") {
-      ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
-    } else {
-      
-      let offset = (size - monsterSize) / 2;
-      ctx.drawImage(
-        potwor,
-        m.col * size + offset,
-        m.row * size + offset,
-        monsterSize,
-        monsterSize
-      );
+
+  zagrozenia.forEach(m => {
+
+    // PUŁAPKI
+    if (m.typ === "pulapka") {
+      if (!wylaczPulapki) {
+        ctx.drawImage(
+          pulapka,
+          m.col * size,
+          m.row * size,
+          size,
+          size
+        );
+      }
+    }
+
+    // POTWORY / RUCHOME ZAGROŻENIA
+    else {
+      if (!wylaczPotwory) {
+        let offset = (size - monsterSize) / 2;
+
+        ctx.drawImage(
+          potwor,
+          m.col * size + offset,
+          m.row * size + offset,
+          monsterSize,
+          monsterSize
+        );
+      }
     }
   });
+
+  // ZAGADKI
   zagadki.forEach(z => {
-    ctx.drawImage(zagadka, z.col * size, z.row * size, size, size);
+    ctx.drawImage(
+      zagadka,
+      z.col * size,
+      z.row * size,
+      size,
+      size
+    );
   });
 
+  // BONUSY
   bonusy.forEach(b => {
 
-  if (b.typ === "hp") {
-    ctx.drawImage(
-      serce,
-      b.col * size,
-      b.row * size,
-      size,
-      size
-    );
-  }
+    // HP
+    if (b.typ === "hp") {
+      if (!wylaczHP) {
+        ctx.drawImage(
+          serce,
+          b.col * size,
+          b.row * size,
+          size,
+          size
+        );
+      }
+    }
 
-  if (b.typ === "stamina") {
-    ctx.drawImage(
-      piorun,
-      b.col * size,
-      b.row * size,
-      size,
-      size
-    );
-  }
+    // STAMINA
+    if (b.typ === "stamina") {
+      if (!wylaczStamine) {
+        ctx.drawImage(
+          piorun,
+          b.col * size,
+          b.row * size,
+          size,
+          size
+        );
+      }
+    }
 
-});
+  });
 }
 
 

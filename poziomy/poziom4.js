@@ -1,6 +1,11 @@
 const area = document.querySelector(".area");
 const ctx = area.getContext("2d");
 
+const wylaczPotwory = localStorage.getItem("wylaczPotwory") === "true";
+const wylaczPulapki = localStorage.getItem("wylaczPulapki") === "true";
+const wylaczHP = localStorage.getItem("wylaczHP") === "true";
+const wylaczStamine = localStorage.getItem("wylaczStamine") === "true";
+
 const bloczek = new Image();
 bloczek.src = "bloczek.jpg";
 
@@ -146,76 +151,28 @@ function rysuj() {
       ctx.strokeRect(col * size, row * size, size, size);
     }
   }
+
   const monsterSize = 90;
-zagrozenia.forEach(m => {
+
+  zagrozenia.forEach(m => {
     if (m.typ === "pulapka") {
-      ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
+      if (!wylaczPulapki) {
+        ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
+      }
     } else {
-     
-      let offset = (size - monsterSize) / 2;
-      ctx.drawImage(
-        potwor,
-        m.col * size + offset,
-        m.row * size + offset,
-        monsterSize,
-        monsterSize
-      );
-    }
-  });
-   zagadki.forEach(z => {
-    ctx.drawImage(zagadka, z.col * size, z.row * size, size, size);
-  });
-}
-function updateMonsters() {
- zagrozenia.forEach(m => {
-    if (m.typ === "gora-dol") {
-      m.row += m.dir * m.speed;
+      if (!wylaczPotwory) {
+        let offset = (size - monsterSize) / 2;
 
-    
-      if (m.row >= m.endRow) {
-        m.row = m.endRow;
-        m.dir = -1; 
-      } else if (m.row <= m.startRow) {
-        m.row = m.startRow;
-        m.dir = 1;  
-      }
-    }
-  else if (m.typ == "prawo-lewo") {
-      m.col += m.dir * m.speed;
-
-      if (m.col >= m.endCol) {
-        m.col = m.endCol;
-        m.dir = -1; // w lewo
-      } else if (m.col <= m.startCol) {
-        m.col = m.startCol;
-        m.dir = 1;  // w prawo
+        ctx.drawImage(
+          potwor,
+          m.col * size + offset,
+          m.row * size + offset,
+          monsterSize,
+          monsterSize
+        );
       }
     }
   });
-
-  bonusy.forEach(b => {
-
-  if (b.typ === "hp") {
-    ctx.drawImage(
-      serce,
-      b.col * size,
-      b.row * size,
-      size,
-      size
-    );
-  }
-
-  if (b.typ === "stamina") {
-    ctx.drawImage(
-      piorun,
-      b.col * size,
-      b.row * size,
-      size,
-      size
-    );
-  }
-
-});
 }
 
 
