@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #050508;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+    background-size: 40px 40px;
+}
+
+.menu_k{
+    text-align: center;
+}
+
+.napis{
+    color: #00ffff;
+    font-size: 64px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00a3a3;
+}
+
+.ustawienia-box{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    border: 2px solid #9400d3;
+    padding: 30px;
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 10px #9400d3,
+        0 0 20px rgba(148,0,211,0.5);
+
+    background: rgba(5,5,8,0.8);
+}
+
+.opcja{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    color: #00ffff;
+    font-size: 20px;
+    cursor: pointer;
+
+    text-shadow: 0 0 5px #00ffff;
+}
+
+.opcja input[type="checkbox"]{
+    width: 22px;
+    height: 22px;
+    accent-color: #ff007f;
+    cursor: pointer;
+}
+
+.save-btn{
+    margin-top: 25px;
+    width: 320px;
+    padding: 12px;
+
+    background: transparent;
+    border: 3px solid #00ff66;
+
+    color: #00ff66;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+    border-radius: 8px;
+
+    box-shadow: 0 0 10px #00ff66;
+    text-shadow: 0 0 5px #00ff66;
+
+    transition: 0.3s;
+}
+
+.save-btn:hover{
+    background: #00ff66;
+    color: #050508;
+    box-shadow: 0 0 30px #00ff66;
+    transform: scale(1.05);
+}
+
+.powrot{
+    margin-top: 35px;
+
+    background: transparent;
+    color: #ff007f;
+
+    border: 3px solid #ff007f;
+    border-radius: 8px;
+
+    padding: 12px 40px;
+    width: 280px;
+
+    font-size: 26px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 10px #ff007f;
+    text-shadow: 0 0 5px #ff007f;
+
+    transition: 0.3s;
+}
+
+.powrot:hover{
+    background-color: #ff007f;
+    color: #050508;
+    box-shadow: 0 0 30px #ff007f;
+}
