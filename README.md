@@ -86,25 +86,42 @@ Jesteś hakerem uwięzionym w cyfrowym labiryncie korporacji **NEON**. Twoim cel
 # Struktura projektu
 
 ```text
-- index.html
-- tytulowa.css
-
-/poziomy
-├── bloczek.jpg
-├── poziomy.css
-├── poziom1.html
-├── poziom1.js
-├── poziom2.html
-├── poziom2.js
-├── poziom3.html
-├── poziom3.js
-├── poziom4.html
-├── poziom4.js
-├── poziom5.html
-└── poziom5.js
-
-/skrypty
-└── movement.js
+.
+├── assets/                 # Zasoby globalne
+│   ├── pulapka.png
+│   ├── serce.png
+│   └── stamina.png
+├── poziomy/                # Logika i widoki poziomów
+│   ├── bloczek.jpg
+│   ├── potwor.png
+│   ├── pulapka.png
+│   ├── serce.png
+│   ├── stamina.png
+│   ├── zagadka.png
+│   ├── poziomy.css
+│   ├── poziom1.html
+│   ├── poziom1.js
+│   ├── poziom2.html
+│   ├── poziom2.js
+│   ├── poziom3.html
+│   ├── poziom3.js
+│   ├── poziom4.html
+│   ├── poziom4.js
+│   ├── poziom5.html
+│   └── poziom5.js
+├── skrypty/                # Wspólne skrypty funkcjonalne
+│   └── movement.js
+├── Pozostale/              # ui menu
+│   ├── poz.css
+│   └── poziomy.html
+├── index.html              # Strona główna / menu gry
+├── tytulowa.css
+├── Frame.png
+├── Projekt.pdf
+├── Projekt.xlsx
+├── README.md
+├── harmonogram.pdf
+└── README.md
 
 
 
