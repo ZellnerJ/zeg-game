@@ -113,7 +113,12 @@ Projekt został wykonany przy użyciu:
 Projekt realizowany zgodnie z metodyką Kanban oraz harmonogramem opracowanym w formie wykresu Gantta.
 - Narzędzia: Git, GitHub, Trello
 - Etapy realizacji: analiza, projektowanie, implementacja, testowanie, wdrożenie.
+# Uruchomienie projektu
 
+1. **Pobranie repozytorium:**
+   `git clone https://github.com/ZellnerJ/zeg-game.git`
+2. **Uruchomienie:**
+   - Otwórz plik `index.html` bezpośrednio w przeglądarce lub użyj rozszerzenia **Live Server** w Visual Studio Code.
 # Testowanie
 
 Testowane elementy:
