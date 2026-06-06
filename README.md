@@ -14,7 +14,17 @@ Celem gry jest przechodzenie przez kolejne labirynty i dotarcie do wyjścia. Pod
 - **JavaScript** – obsługa ruchu postaci, przeciwników, kolizji i poziomów  
 
 ---
+# Opis rozgrywki
 
+* Eksploracja: Przemierzaj korytarze labiryntu w poszukiwaniu wyjścia i ukrytych zasobów.
+* Zagadki logiczne: Rozwiązuj systemowe zadania, aby odblokować przejścia do kolejnych sekcji.
+* Unikanie zagrożeń: Omijaj patrole przeciwników oraz śmiercionośne pułapki rozmieszczone w całym systemie.
+* Zarządzanie zdrowiem (HP): Uważaj na każdy krok – kontakt z wrogami lub pułapkami drastycznie obniża Twój pasek życia.
+* Zbieranie przedmiotów: Odnajduj na mapie bonusy, które regenerują utracone HP i pozwalają kontynuować misję.
+
+> Progresja: Każdy kolejny poziom zwiększa wyzwanie poprzez większe mapy, większą liczbę zagrożeń oraz bardziej wymagające zagadki logiczne.
+
+---
 # Wymagania funkcjonalne
 
 ## Sterowanie postacią
