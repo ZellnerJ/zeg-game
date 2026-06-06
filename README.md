@@ -138,7 +138,11 @@ Planowane rozszerzenia:
 - ranking graczy
 - dodatkowe typy przeciwników
 - system umiejętności postaci
-
+- Integracja z bazą danych SQL w celu przechowywania wyników graczy w tabeli rekordów.
+- Implementacja systemu dziennego logowania z unikalnymi bonusami dla gracza za regularność.
+- Dodanie trybu "Speedrun" z licznikiem czasu dla każdego poziomu.
+- Opracowanie systemu dynamicznej zmiany oświetlenia zależnie od stanu staminy gracza.
+- Wprowadzenie wsparcia dla kontrolerów (gamepadów) w celu poprawy wygody sterowania.
 # Dokumentacja
 
 Dokumentacja projektu zawiera:
