@@ -1,97 +1,72 @@
-# Gra Labirynt
+# ZEG-GAME
 
-Gra Labirynt to 2D gra przeglądarkowa. Zadaniem gracza jest przechodzenie przez kolejne labirynty, zbieranie przedmiotów, omijanie przeciwników oraz rozwiązywanie zagadek. 
-# Cel gry
+Nowoczesna przeglądarkowa gra 2D typu labirynt, wykonana w technologii HTML5 Canvas oraz JavaScript. Wcielasz się w rolę hakera uwięzionego w systemie korporacji NEON. Twoim celem jest eksploracja, rozwiązywanie zagadek oraz unikanie zabezpieczeń, aby odzyskać wolność.
+
 ---
-Celem gry jest przechodzenie przez kolejne labirynty i dotarcie do wyjścia. Podczas gry trzeba zbierać przedmioty, unikać przeciwników oraz rozwiązywać zagadki, które odblokowują dalszą drogę.
+
+# Cel gry
+
+Celem gry jest przechodzenie przez kolejne poziomy labiryntu i dotarcie do wyjścia. Podczas rozgrywki gracz:
+* Eksploruje mapę.
+* Zbierze przedmioty (serca, staminę).
+* Rozwiązuje zagadki logiczne, które odblokowują dalszą drogę.
+* Unika przeciwników i pułapek.
+* Zarządza poziomem zdrowia (HP).
+
+> Progresja: Każdy kolejny poziom zwiększa wyzwanie poprzez większe mapy, większą liczbę zagrożeń oraz bardziej wymagające zagadki logiczne.
+---
+# Menu główne
+
+Menu główne umożliwia pełną kontrolę nad rozgrywką za pomocą czterech głównych przycisków:
+
+- **Zagraj:** Rozpoczyna nową rozgrywkę od pierwszego poziomu.
+- **Poziomy:** Wyświetla listę dostępnych etapów z przyciskami. Kliknięcie w wybrany poziom przekierowuje bezpośrednio do wybranej mapy.
+- **Ustawienia:** Otwiera dedykowaną stronę z panelem konfiguracyjnym. Pozwala ona dostosować poziom trudności poprzez włączanie i wyłączanie poszczególnych elementów gry za pomocą interaktywnych przycisków:
+    - Pułapki (Włącz/Wyłącz)
+    - Przeciwnicy (Włącz/Wyłącz)
+    - Pioruny staminy (Włącz/Wyłącz)
+    - Serduszka HP (Włącz/Wyłącz)
+- **Wyjdź:** Zamyka kartę lub kończy sesję w przeglądarce.
+---
+
+# Funkcjonalności
+
+### Sterowanie postacią
+* Klawisze: WASD lub strzałki.
+* Płynny ruch po siatce (grid).
+* Kolizje ze ścianami.
+
+### System labiryntu
+* Plansza oparta na siatce.
+* Punkt startowy i wyjście.
+* Przechodzenie między poziomami po rozwiązaniu zagadki.
+
+### Zagadki
+* Okienka z pytaniami logicznymi rozmieszczone w labiryncie.
+* Poprawna odpowiedź jest wymagana do odblokowania wyjścia.
+* System komunikatów o poprawności odpowiedzi.
+
+### Zagrożenia i HP
+* Przeciwnicy patrolujący korytarze.
+* Pułapki odbierające HP.
+* Ekran „Game Over” po utracie całego zdrowia.
+
+### Interfejs użytkownika (UI)
+* Aktualny poziom.
+* Pasek zdrowia (HP).
+* Pasek staminy.
+* Komunikaty zwycięstwa, porażki i statusu zagadek.
+* Styl: prosty, czytelny i responsywny.
+*  Przyciski nawigacyjne: na dole ekranu dodano przyciski „Następny” i „Poprzedni”, umożliwiające łatwiejsze przeglądanie kolejnych labiryntów
 
 ---
 
 # Technologie
 
-- **HTML5** – tworzenie struktury gry oraz elementu canvas  
-- **CSS** – wygląd menu, interfejsu i ekranów gry  
-- **JavaScript** – obsługa ruchu postaci, przeciwników, kolizji i poziomów  
-
----
-# Opis rozgrywki
-
-* Eksploracja: Przemierzaj korytarze labiryntu w poszukiwaniu wyjścia i ukrytych zasobów.
-* Zagadki logiczne: Rozwiązuj systemowe zadania, aby odblokować przejścia do kolejnych sekcji.
-* Unikanie zagrożeń: Omijaj patrole przeciwników oraz śmiercionośne pułapki rozmieszczone w całym systemie.
-* Zarządzanie zdrowiem (HP): Uważaj na każdy krok – kontakt z wrogami lub pułapkami drastycznie obniża Twój pasek życia.
-* Zbieranie przedmiotów: Odnajduj na mapie bonusy, które regenerują utracone HP i pozwalają kontynuować misję.
-
-> Progresja: Każdy kolejny poziom zwiększa wyzwanie poprzez większe mapy, większą liczbę zagrożeń oraz bardziej wymagające zagadki logiczne.
-
----
-# Wymagania funkcjonalne
-
-## Sterowanie postacią
-
-- Sterowanie za pomocą klawiszy WASD lub strzałek  
-- Poruszanie po planszy w określonych polach  
-- Brak możliwości przechodzenia przez ściany  
-
-## Poziomy i mapy
-
-- Każdy poziom posiada punkt startowy i wyjście  
-- Po dotarciu do mety wczytuje się kolejny poziom  
-- Gra zawiera minimum 5 poziomów o rosnącym poziomie trudności  
-
-## Przedmioty
-
-- Przedmioty znikają po zebraniu  
-- Zebrane elementy wpływają na statystyki gracza  
-
-## Zagadki
-
-- W wybranych miejscach pojawiają się pytania lub zagadki  
-- Poprawna odpowiedź umożliwia dalsze przejście  
-- Gra wyświetla komunikat o poprawnej lub błędnej odpowiedzi  
-
-## Przeciwnicy i zdrowie
-
-- Na mapie poruszają się przeciwnicy  
-- Kontakt z potworem lub pułapką zmniejsza liczbę punktów życia  
-- Po utracie całego HP pojawia się ekran „Game Over”  
-
-## Menu i interfejs
-
-- Ekran startowy z przyciskiem rozpoczęcia gry  
-- Widoczny poziom, pasek zdrowia i zebrane przedmioty  
-- Możliwość rozpoczęcia gry od nowa po wygranej lub przegranej  
-
----
-
-# Wymagania techniczne
-
-- Logika wykonana w czystym JavaScript  
-- Renderowanie grafiki za pomocą elementu canvas  
-- Płynne działanie  
-- Podział projektu na kilka plików  
-- Poprawne działanie w popularnych przeglądarkach internetowych
-
-# FABULA
-
-Jesteś hakerem uwięzionym w cyfrowym labiryncie korporacji **NEON**. Twoim celem jest ucieczka. Aby otworzyć wyjście z każdego poziomu, musisz rozwiązać wszystkie zagadki logiczne. Korytarze tego miejsca są naszpikowane technologią, która nie wybacza żadnego błędu. Zostałeś tu zesłany za wykradzenie plików, które mogłyby pogrążyć całe imperium korporacji. Twoja jedyna szansa na przeżycie to bezszelestne przemykanie się między patrolami wrogich jednostek. Tylko odnalezienie drogi do centrum sterowania pozwoli Ci na trwałe usunięcie blokady i powrót do rzeczywistości.
-
----
-
-## ⚠️ Zagrożenia i pomoc
-
-### Wrogowie
-* **Złe roboty:** Unikaj patrolujących korytarze jednostek wroga.
-
-### Pułapki
-* **Kapkany:** Uważaj na mechaniczne pułapki, które odbierają Twoje punkty HP.
-
-### Wsparcie
-* ❤️ **Serduszka:** Zbieraj, aby leczyć swoje HP.
-* ⚡ **Pioruny:** Zbieraj, aby odnawiać staminę niezbędną do szybkiej ucieczki.
-
-
-
+Projekt został wykonany przy użyciu:
+* **HTML5** (struktura i Canvas)
+* **CSS3** (wygląd i UI)
+* **JavaScript** (logika gry, kolizje, AI przeciwników)
 
 # Struktura projektu
 
@@ -132,7 +107,45 @@ Jesteś hakerem uwięzionym w cyfrowym labiryncie korporacji **NEON**. Twoim cel
 ├── README.md
 ├── harmonogram.pdf
 └── README.md
+```
+# Zarządzanie projektem
 
+Projekt realizowany zgodnie z metodyką Kanban oraz harmonogramem opracowanym w formie wykresu Gantta.
+- Narzędzia: Git, GitHub, Trello
+- Etapy realizacji: analiza, projektowanie, implementacja, testowanie, wdrożenie.
+
+# Testowanie
+
+Testowane elementy:
+- kolizje
+- przechodzenie poziomów
+- działanie zagadek
+- system HP
+- responsywność
+- wydajność gry
+
+# Możliwości rozwoju
+
+Planowane rozszerzenia:
+- generator losowych labiryntów
+- zapis stanu gry
+- multiplayer
+- ranking graczy
+- dodatkowe typy przeciwników
+- system umiejętności postaci
+
+# Dokumentacja
+
+Dokumentacja projektu zawiera:
+- opis systemu
+- wymagania funkcjonalne
+- wymagania niefunkcjonalne
+- dokumentację kodu
+- możliwości dalszego rozwoju
+
+# Licencja
+
+Projekt edukacyjny realizowany w celach dydaktycznych
 
 
 
