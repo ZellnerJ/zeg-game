@@ -1,8 +1,6 @@
 const area = document.querySelector(".area");
 const ctx = area.getContext("2d");
 
-const wylaczPotwory = localStorage.getItem("wylaczPotwory") === "true";
-const wylaczPulapki = localStorage.getItem("wylaczPulapki") === "true";
 const wylaczHP = localStorage.getItem("wylaczHP") === "true";
 const wylaczStamine = localStorage.getItem("wylaczStamine") === "true";
 
@@ -180,7 +178,6 @@ function rysuj() {
 
     // PUŁAPKI
     if (m.typ === "pulapka") {
-      if (!wylaczPulapki) {
         ctx.drawImage(
           pulapka,
           m.col * size,
@@ -188,12 +185,11 @@ function rysuj() {
           size,
           size
         );
-      }
+      
     }
 
     // POTWORY / RUCHOME ZAGROŻENIA
     else {
-      if (!wylaczPotwory) {
         let offset = (size - monsterSize) / 2;
 
         ctx.drawImage(
@@ -203,7 +199,7 @@ function rysuj() {
           monsterSize,
           monsterSize
         );
-      }
+      
     }
   });
 
