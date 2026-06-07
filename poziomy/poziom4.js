@@ -140,12 +140,14 @@ function rysuj() {
 
   for (let row = 0; row < plotno.length; row++) {
     for (let col = 0; col < plotno[row].length; col++) {
+
       if (plotno[row][col] == 1) {
         ctx.drawImage(bloczek, col * size, row * size, size, size);
       } else {
         ctx.fillStyle = "black";
         ctx.fillRect(col * size, row * size, size, size);
       }
+
       ctx.strokeRect(col * size, row * size, size, size);
     }
   }
@@ -154,21 +156,96 @@ function rysuj() {
 
   zagrozenia.forEach(m => {
     if (m.typ === "pulapka") {
-        ctx.drawImage(pulapka, m.col * size, m.row * size, size, size);
-      
+      ctx.drawImage(
+        pulapka,
+        m.col * size,
+        m.row * size,
+        size,
+        size
+      );
     } else {
-        let offset = (size - monsterSize) / 2;
+      const offset = (size - monsterSize) / 2;
 
-        ctx.drawImage(
-          potwor,
-          m.col * size + offset,
-          m.row * size + offset,
-          monsterSize,
-          monsterSize
-        );
-      
+      ctx.drawImage(
+        potwor,
+        m.col * size + offset,
+        m.row * size + offset,
+        monsterSize,
+        monsterSize
+      );
     }
   });
+
+  zagadki.forEach(z => {
+    ctx.drawImage(
+      zagadka,
+      z.col * size,
+      z.row * size,
+      size,
+      size
+    );
+  });
+
+  bonusy.forEach(b => {
+
+    if (b.typ === "hp" && !wylaczHP) {
+      ctx.drawImage(
+        serce,
+        b.col * size,
+        b.row * size,
+        size,
+        size
+      );
+    }
+
+    if (b.typ === "stamina" && !wylaczStamine) {
+      ctx.drawImage(
+        piorun,
+        b.col * size,
+        b.row * size,
+        size,
+        size
+      );
+    }
+
+  });
+}
+
+function updateMonsters() {
+
+  zagrozenia.forEach(m => {
+
+    if (m.typ === "gora-dol") {
+
+      m.row += m.dir * m.speed;
+
+      if (m.row >= m.endRow) {
+        m.row = m.endRow;
+        m.dir = -1;
+      }
+      else if (m.row <= m.startRow) {
+        m.row = m.startRow;
+        m.dir = 1;
+      }
+
+    }
+    else if (m.typ === "prawo-lewo") {
+
+      m.col += m.dir * m.speed;
+
+      if (m.col >= m.endCol) {
+        m.col = m.endCol;
+        m.dir = -1;
+      }
+      else if (m.col <= m.startCol) {
+        m.col = m.startCol;
+        m.dir = 1;
+      }
+
+    }
+
+  });
+
 }
 
 

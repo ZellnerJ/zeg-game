@@ -192,6 +192,16 @@ function rysuj() {
     }
   });
 
+  zagadki.forEach(z => {
+  ctx.drawImage(
+    zagadka,
+    z.col * size,
+    z.row * size,
+    size,
+    size
+  );
+});
+
   bonusy.forEach(b => {
     if (b.typ === "hp") {
       if (wylaczHP !== true) {
