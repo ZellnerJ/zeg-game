@@ -153,6 +153,8 @@ Dokumentacja projektu zawiera:
 - wymagania funkcjonalne
 - wymagania niefunkcjonalne
 - dokumentację kodu
+- szczególy zarządzania projektem
+- szczególy testowania
 
 
 # Licencja
