@@ -99,6 +99,9 @@ Projekt został wykonany przy użyciu:
 ├── Pozostale/              # ui menu
 │   ├── poz.css
 │   └── poziomy.html
+│   └── ustawienia.js
+│   └──ustawienia html
+│   └──ustawienia css
 ├── index.html              # Strona główna / menu gry
 ├── tytulowa.css
 ├── Frame.png
