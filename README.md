@@ -153,7 +153,7 @@ Dokumentacja projektu zawiera:
 - wymagania funkcjonalne
 - wymagania niefunkcjonalne
 - dokumentację kodu
-- możliwości dalszego rozwoju
+
 
 # Licencja
 
