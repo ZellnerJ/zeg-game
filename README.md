@@ -149,6 +149,7 @@ Planowane rozszerzenia:
 # Dokumentacja
 
 Dokumentacja projektu zawiera:
+- interfejs
 - opis systemu
 - wymagania funkcjonalne
 - wymagania niefunkcjonalne
